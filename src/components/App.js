@@ -1,13 +1,17 @@
 import React from 'react';
 import PlacesForm from './PlacesForm';
+import FoodsForm from './FoodsForm';
+import ProfileForm from './ProfileForm';
 import PlacesList from './PlacesList';
 import FoodsList from './FoodsList';
-import FoodsForm from './FoodsForm';
+//
+import ProfileStore from '../stores/ProfileStore';
+import PlaceStore from '../stores/PlaceStore';
+import FoodStore from '../stores/FoodStore';
 //
 import PlaceActions from '../actions/PlaceActions';
-import PlaceStore from '../stores/PlaceStore';
 import FoodActions from '../actions/FoodActions';
-import FoodStore from '../stores/FoodStore';
+import ProfileActions from '../actions/ProfileActions';
 
 
 const App = React.createClass({
@@ -15,13 +19,22 @@ const App = React.createClass({
     return {
       places: PlaceStore.getAll(),
       foods: FoodStore.getAll(),
+      profile: ProfileStore.getAll(),
     }
   },
 
   componentWillMount() {
     PlaceStore.startListening(this._onChange);
     FoodStore.startListening(this._onChangeFoods);
+    ProfileStore.startListening(this._onChangeProfile);
   },
+
+  componentWillUnmount() {
+    PlaceStore.stopListening(this._onChange);
+    FoodStore.stopListening(this._onChangeFoods);
+    ProfileStore.stopListening(this._onChangeProfile);
+  },
+
 
   _onChange() {
     this.setState({
@@ -35,9 +48,10 @@ const App = React.createClass({
     })
   },
 
-  componentWillUnmount() {
-    PlaceStore.stopListening(this._onChange);
-    FoodStore.stopListening(this._onChangeFoods);
+  _onChangeProfile() {
+    this.setState({
+      profile: ProfileStore.getAll(),
+    })
   },
 
   addPlace(newPlace) {
@@ -48,16 +62,27 @@ const App = React.createClass({
     FoodActions.createFood(newFood);
   },
 
+  editProfile(myPackage) {
+    console.log('edited package in app.js: ',myPackage);
+    ProfileActions.updateProfile(myPackage);
+  },
+
   render() {
-    const { places, foods } = this.state;
+    const { places, foods, profile } = this.state;
+    console.log('profile in App.js: ',profile);
 
     return (
       <div className='container'>
         <h1>My Profile</h1>
-        <PlacesList places={places} />
-        <PlacesForm addPlace={this.addPlace} />
-        <FoodsList foods={foods} />
-        <FoodsForm addFood={this.addFood} />
+        <ProfileForm editProfile={this.editProfile} profile={profile}/>
+        <div className="col-xs-6">
+          <PlacesList places={places} />
+          <PlacesForm addPlace={this.addPlace} />
+        </div>
+        <div className="col-xs-6">
+          <FoodsList foods={foods} />
+          <FoodsForm addFood={this.addFood} />
+        </div>
       </div>
     )
   }

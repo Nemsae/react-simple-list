@@ -40,7 +40,6 @@ const PlaceStore = Object.assign({}, EventEmitter.prototype, {
 AppDispatcher.register(action => {
   //action is the object {type:"CREATE_PLACE"...}
   const { type, payload } = action;
-  console.log('PlaceStore Action: ',action);
 
 
   //if 'type' is 'CREATE_PLACE', then we will pull the place out of the payload, push it to the array,
@@ -49,6 +48,7 @@ AppDispatcher.register(action => {
     case 'CREATE_PLACE':
       const { place } = payload;
       _places.push(place);
+      console.log('PlaceStore Action: ',action);
       PlaceStore.emit('CHANGE');
       break;
   }

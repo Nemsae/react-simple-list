@@ -10,7 +10,7 @@ const FoodStore = Object.assign({}, EventEmitter.prototype, {
   },
 
   stopListening(callback) {
-    this.removeListener('CHANGE, callback')
+    this.removeListener('CHANGE', callback)
   },
 
   getAll() {
@@ -20,12 +20,12 @@ const FoodStore = Object.assign({}, EventEmitter.prototype, {
 
 AppDispatcher.register(action => {
   const { type, payload } = action;
-  console.log('FoodStore Action: ',action);
 
   switch (type) {
     case 'CREATE_FOOD':
       const { food } = payload;
       _foods.push(food);
+      console.log('FoodStore Action: ',action);
       FoodStore.emit('CHANGE');
 
       break;
