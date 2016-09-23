@@ -6,7 +6,8 @@ const ProfileActions = {
       type: 'EDIT_PROFILE',
       payload: {myPackage}
     })
-  }
+  },
+
 }
 
 

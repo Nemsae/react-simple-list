@@ -48,7 +48,12 @@ AppDispatcher.register(action => {
     case 'CREATE_PLACE':
       const { place } = payload;
       _places.push(place);
-      console.log('PlaceStore Action: ',action);
+      PlaceStore.emit('CHANGE');
+      break;
+
+    case 'CLEAR_PLACES':
+      const { place1 } = payload;
+      _places = place1;
       PlaceStore.emit('CHANGE');
       break;
   }

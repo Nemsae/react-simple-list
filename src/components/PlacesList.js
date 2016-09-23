@@ -8,7 +8,7 @@ const PlacesList = props => {
       <h3>Places Visited</h3>
       <ul>
         {places.map((place, i) => (
-          <li key={i}>{place}<button>X</button></li>
+          <li key={i}>{place}</li>
         ))}
       </ul>
     </div>

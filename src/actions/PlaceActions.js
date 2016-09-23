@@ -8,7 +8,16 @@ const PlaceActions = {
         place: place,
       }
     })
-  }
+  },
+
+  clearPlaces() {
+    AppDispatcher.dispatch({
+      type: 'CLEAR_PLACES',
+      payload: {
+        place1: [],
+      }
+    })
+  },
 }
 
 export default PlaceActions;

@@ -8,7 +8,7 @@ const FoodsList = props => {
       <h3>Favorite Foods List</h3>
       <ul>
         {foods.map((food, i) => (
-          <li key={i}>{food}<button>X</button></li>
+          <li key={i}>{food}</li>
         ))}
       </ul>
     </div>

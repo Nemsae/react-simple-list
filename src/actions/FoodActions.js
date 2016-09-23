@@ -8,7 +8,16 @@ const FoodActions = {
         food: food,
       }
     })
-  }
+  },
+
+  clearFoods() {
+    AppDispatcher.dispatch({
+      type: 'CLEAR_FOODS',
+      payload: {
+        food1: [],
+      }
+    })
+  },
 }
 
 export default FoodActions;

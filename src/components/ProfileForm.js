@@ -53,7 +53,6 @@ const ProfileForm = React.createClass({
 
   render() {
     let { profile } = this.props;
-    console.log('profile in ProfileForm: ', profile);
 
     return (
       <div>

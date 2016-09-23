@@ -35,7 +35,6 @@ const App = React.createClass({
     ProfileStore.stopListening(this._onChangeProfile);
   },
 
-
   _onChange() {
     this.setState({
       places: PlaceStore.getAll(),
@@ -63,13 +62,19 @@ const App = React.createClass({
   },
 
   editProfile(myPackage) {
-    console.log('edited package in app.js: ',myPackage);
     ProfileActions.updateProfile(myPackage);
+  },
+
+  clearOutFoods() {
+    FoodActions.clearFoods();
+  },
+
+  clearOutPlaces() {
+    PlaceActions.clearPlaces();
   },
 
   render() {
     const { places, foods, profile } = this.state;
-    console.log('profile in App.js: ',profile);
 
     return (
       <div className='container'>
@@ -77,11 +82,11 @@ const App = React.createClass({
         <ProfileForm editProfile={this.editProfile} profile={profile}/>
         <div className="col-xs-6">
           <PlacesList places={places} />
-          <PlacesForm addPlace={this.addPlace} />
+          <PlacesForm addPlace={this.addPlace} clearOutPlaces={this.clearOutPlaces} />
         </div>
         <div className="col-xs-6">
           <FoodsList foods={foods} />
-          <FoodsForm addFood={this.addFood} />
+          <FoodsForm addFood={this.addFood} clearOutFoods={this.clearOutFoods} />
         </div>
       </div>
     )
@@ -89,4 +94,3 @@ const App = React.createClass({
 })
 
 export default App;
-//module.exports = App;

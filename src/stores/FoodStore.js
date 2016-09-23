@@ -25,7 +25,13 @@ AppDispatcher.register(action => {
     case 'CREATE_FOOD':
       const { food } = payload;
       _foods.push(food);
-      console.log('FoodStore Action: ',action);
+      FoodStore.emit('CHANGE');
+
+      break;
+
+    case 'CLEAR_FOODS':
+      const { food1 } = payload;
+      _foods = food1;
       FoodStore.emit('CHANGE');
 
       break;

@@ -7,14 +7,22 @@ const FoodsForm = React.createClass({
 
     let newFood = FoodsInput.value;
     FoodsInput.value = '';
+    FoodsInput.focus();
     this.props.addFood(newFood);
+  },
+
+  clearForm() {
+    let { clearOutFoods } = this.props;
+
+    clearOutFoods();
   },
 
   render() {
     return(
-      <form onSubmit={this.submitForm}>
+      <form>
         <input ref='FoodsInput' type="text"/>
-        <button>Add</button>
+        <button onClick={this.submitForm}>Add</button>
+        <button onClick={this.clearForm}>Clear</button>
       </form>
     )
   }

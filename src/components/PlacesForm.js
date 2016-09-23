@@ -7,15 +7,22 @@ const PlacesForm = React.createClass({
 
     let newPlace = PlacesInput.value;
     PlacesInput.value = '';
-    //PlacesInput.focus();
+    PlacesInput.focus();
 
     this.props.addPlace(newPlace);
   },
+
+  clearForm() {
+    let { clearOutPlaces } = this.props;
+    clearOutPlaces();
+  },
+
   render() {
     return (
-      <form onSubmit={this.submitForm}>
-        <input ref='PlacesInput' type="text" required/>
-        <button>Add</button>
+      <form>
+        <input ref='PlacesInput' type="text"/>
+        <button onClick={this.submitForm}>Add</button>
+        <button onClick={this.clearForm}>Clear</button>
       </form>
     )
   }
